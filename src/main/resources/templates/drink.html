@@ -1,0 +1,56 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title th:text="${drink.nimi}">Juoman nimi</title>
+        <meta charset="utf-8" />
+        <style>
+
+            li {
+                margin: 0;
+                list-style-type: none;
+            }
+            li#ingredientList {
+                list-style-type: disc;
+            }
+            .aligned {
+                float: left;
+            }
+            .recipe {
+                clear: both;
+            }
+            
+        </style>
+    </head>
+
+    <body>
+        <h1 th:text="${drink.nimi}">Juoman nimi</h1>
+        
+        <h3>Ainesosat</h3>
+        <ul class="aligned">
+            <li th:each="ingredient : ${ingredients}">
+                <span th:text="${ingredient.amount}">Lisättävän ainesosan määrä</span>               
+            </li>          
+        </ul>
+        
+        <ul class="aligned">
+            <li th:each="name : ${names}">
+                <span th:text="${name}">Ainesosan nimi</span>               
+            </li>          
+        </ul>
+        
+        <div class="recipe">
+            <h3>Ohje</h3>
+            <ul>
+                <li th:each="ingredient: ${ingredients}">
+                    <span th:text="${ingredient.addingOrder}">Järjestys missä ainesosa lisätään</span>
+                    <span th:text="${ingredient.recipeText}">Ohjeet tähän askeleeseen</span>
+                </li>
+            </ul>
+        </div>
+        
+        <p><a href="/drinks">Lisää ainesosia tähän juomaan</a></p><br/>
+        <p><a href="/">Takaisin pääsivulle</a></p>
+        
+    </body>
+</html>

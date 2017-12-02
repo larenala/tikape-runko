@@ -2,15 +2,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title>Drinkki-arkisto</title>
         <meta charset="utf-8" />
+
     </head>
 
     <body>
-        <h1>Heippa vaan!</h1>
+        <div class="content">
+            <h1>Drinkkiarkisto</h1>
 
-        <p>Ja .. <span th:text="${viesti}">jotain?</span></p>
+        <ul>
+            <li th:each="drink : ${drinks}">
+                <a th:href="@{~/drinks/{id}(id=${drink.id})}">
+                <span th:text="${drink.nimi}">Juomien nimet listana</span>
+                </a>
+            </li>
+            
+        </ul> 
+        
 
-        <p><a href="/opiskelijat">Tästä opiskelijalistaukseen.</a></p>
+        <p><a href="/drinks">Muokkaa juomia</a></p>
+        <p><a href="/ingredients">Muokkaa saatavilla olevia ainesosia</a></p>
+        </div>
+        
     </body>
 </html>

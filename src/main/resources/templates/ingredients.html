@@ -1,0 +1,37 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Ainesosat</title>
+        <meta charset="utf-8" />
+
+    </head>
+
+    <body>
+        <div class="content">
+            <h1>Lista ainesosista</h1>
+
+            <ol>
+                <li th:each="ingredient :  ${ingredients}">
+                    <form action="/ingredients" method="post">                   
+                         <a th:href="${'/ingredients/' + ingredient.id}">
+                             <input type="hidden" name="aineId" th:value="${ingredient.id}"/>
+                             <span th:text="${ingredient.nimi}">
+                            ainesosan nimi</span></a>                   
+                        <input type="submit" name="action" value="Poista"/>
+                    </form>
+                </li>
+            </ol><br/>
+
+            <h4>Lisää uusi ainesosa</h4><br/>
+            <form action="/ingredients" method="POST">
+                <label>Ainesosan nimi:</label><br/>
+                <input type="text" name="nimi"/><br/>
+                <input type="submit" name="action" value="Lisää"/>
+            </form>    
+
+            <p><a th:href="@{~/}">Takaisin juoma-arkiston pääsivulle</a></p>
+        </div>
+        
+    </body>
+</html>

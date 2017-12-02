@@ -1,0 +1,59 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Luo uusia juomia</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <div class="content">
+            <h1>Luo uusia juomia</h1>
+        
+            <h3>Lista juomista</h3>
+            <ul>
+                <li th:each="drink : ${drinks}">
+                    <form action="/drinks" method="post">
+                    <a th:href="@{~/drinks/{id}(id=${drink.id})}">
+                        <input type="hidden" name="id" th:value="${drink.id}"/>
+                        <span th:text="${drink.nimi}">drinkkien nimet listana</span></a>
+                        <input type="submit" name="action" value="Poista"/>                   
+                    </form>
+
+                </li>            
+            </ul><br/> 
+
+            <h3>Lisää uusi juoma </h3>
+
+            <form action="/drinks" method="post">
+                <label>Juoman nimi: </label><br/>
+                <input type="text" name="nimi"/><br/>
+                <input type="submit" name="action" value="Lisää"/><br/>
+            </form>
+
+            <h4>Lisää ainesosia: </h4>
+
+            <form action="/drinks" method="post">
+                <label>Juoman nimi:</label><br/>
+                <select name="drinkID">
+                    <option th:each="drink : ${drinks}" th:value="${drink.id}" th:text="${drink.nimi}">Juoma</option>
+                </select><br/>
+                <label>Lisää valmistusaineita:</label><br/>
+                <select name="ingredientID">
+                    <option th:each="ingredient : ${ingredients}" th:value="${ingredient.id}" th:text="${ingredient.nimi}">Ainesosa</option>
+                </select><br/>
+                <label>Lisäysjärjestys: </label><br/>
+                <input type="number" max= "20" min = "1" name="jarjestys"/><br/>
+                <label>Määrä: </label><br/>
+                <input type="text" name="maara"/><br/>
+                <label>Ohje:</label><br/>
+                <input type="text" name="ohje"/><br/>
+                <input type="submit" name="action" value="Lisää ohjeeseen"/><br/>
+
+            </form><br/>
+
+            <a href="/">Takaisin drinkkiarkiston pääsivulle</a>
+        </div>
+        
+    </body>
+</html>
